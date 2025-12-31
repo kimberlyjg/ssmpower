@@ -1,0 +1,137 @@
+---
+title: "Introduction to ssmpower"
+author: "Kimberly Gilbert"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to ssmpower}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ssmpower)
+```
+
+## Overview
+
+The **ssmpower** package provides power analysis and sample size planning tools for Structural Summary Method (SSM) analyses of circumplex data. This vignette demonstrates the main functions and their usage.
+
+## Background
+
+The Structural Summary Method (SSM) is used to analyze circumplex data, particularly in interpersonal psychology. The key parameters are:
+
+- **Elevation**: The mean level across all octants (general tendency)
+- **Amplitude**: The distinctiveness of the profile (how peaked it is)
+- **Displacement**: The angular location of the peak
+
+This package implements power analysis based on asymptotic standard errors derived by Zimmermann & Wright (2017).
+
+## Effect Size Benchmarks
+
+Based on 433 published SSM analyses:
+
+| Parameter | Small | Medium | Large |
+|-----------|-------|--------|-------|
+| Amplitude | 0.10 | 0.16 | 0.23 |
+| Elevation | 0.02 | 0.11 | 0.27 |
+
+## Power Analysis
+
+### Single-Sample Amplitude Test
+
+How much power do I have to detect a medium amplitude (0.16) with N = 100?
+
+```{r}
+ssm_power_amplitude(effect = 0.16, n = 100)
+```
+
+### Power Across Sample Sizes
+
+```{r}
+# Power for different sample sizes
+ns <- c(50, 100, 150, 200)
+powers <- sapply(ns, function(n) ssm_power_amplitude(0.16, n)$power)
+data.frame(n = ns, power = round(powers, 3))
+```
+
+## Sample Size Planning
+
+### Single-Sample Test
+
+How many participants do I need to detect a small amplitude (0.10) with 80% power?
+
+```{r}
+ssm_sample_size_amplitude(effect = 0.10, power = 0.80)
+```
+
+### Two-Group Comparison
+
+How many participants per group to detect a medium amplitude difference?
+
+```{r}
+ssm_sample_size_amplitude_diff(effect = 0.16, power = 0.80)
+```
+
+## Quick Reference Guide
+
+```{r}
+ssm_sample_size_guide()
+```
+
+## Power Table
+
+```{r}
+ssm_power_table(
+  effects = c(0.10, 0.15, 0.20, 0.25),
+  ns = c(50, 100, 150, 200, 300),
+  type = "amplitude"
+)
+```
+
+## Comprehensive Analysis
+
+The `ssm_analyze()` function performs a full SSM analysis with bootstrap confidence intervals:
+
+```{r}
+# Simulate data
+set.seed(42)
+n <- 250
+external <- rnorm(n)
+angles_rad <- seq(0, 315, by = 45) * pi / 180
+
+octants <- matrix(NA, nrow = n, ncol = 8)
+for (i in 1:8) {
+  octants[, i] <- rnorm(n, mean = 3, sd = 1) +
+    0.4 * external +
+    0.2 * external * cos(angles_rad[i] - pi/2)
+}
+
+# Run analysis
+result <- ssm_analyze(external, octants, n_boot = 500)
+print(result)
+```
+
+## References
+
+Cohen, J. (1988). *Statistical power analysis for the behavioral sciences* (2nd ed.). Lawrence Erlbaum.
+
+Gurtman, M. B. (1992). Construct validity of interpersonal personality measures. *Journal of Personality and Social Psychology, 63*, 105-118.
+
+Zimmermann, J., & Wright, A. G. C. (2017). Beyond description in interpersonal construct validation. *Assessment, 24*, 3-23.
+
+## Citation
+
+To cite this package:
+
+Gilbert, K. (2025). *ssmpower: Power Analysis for the Structural Summary Method*. R package version 1.0.0. https://github.com/kimberlyjg/ssmpower
+
+```r
+citation("ssmpower")
+```

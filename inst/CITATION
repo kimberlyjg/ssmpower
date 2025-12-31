@@ -1,0 +1,16 @@
+citHeader("To cite ssmpower in publications use:")
+
+bibentry(
+  bibtype  = "Manual",
+  title    = "ssmpower: Power Analysis for the Structural Summary Method",
+  author   = person("Kimberly", "Gilbert"),
+  year     = "2025",
+  note     = "R package version 1.0.0",
+  url      = "https://github.com/kimberlyjg/ssmpower",
+  textVersion = paste(
+    "Gilbert, K. (2025).",
+    "ssmpower: Power Analysis for the Structural Summary Method.",
+    "R package version 1.0.0.",
+    "https://github.com/kimberlyjg/ssmpower"
+  )
+)
