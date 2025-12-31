@@ -1,58 +1,65 @@
 #' ssmpower: Power Analysis for the Structural Summary Method
 #'
-#' The ssmpower package provides power analysis and sample size planning tools
-#' for Structural Summary Method (SSM) analyses of circumplex data.
+#' The ssmpower package provides tools for power analysis and sample size
+#' planning for Structural Summary Method (SSM) analyses of circumplex data.
 #'
 #' @section Main Functions:
-#' \describe{
-#'   \item{\code{\link{ssm_power_amplitude}}}{Power for single-sample amplitude test}
-#'   \item{\code{\link{ssm_power_elevation}}}{Power for single-sample elevation test}
-#'   \item{\code{\link{ssm_power_amplitude_diff}}}{Power for two-group amplitude comparison}
-#'   \item{\code{\link{ssm_power_elevation_diff}}}{Power for two-group elevation comparison}
-#'   \item{\code{\link{ssm_sample_size_amplitude}}}{Sample size for amplitude test}
-#'   \item{\code{\link{ssm_sample_size_elevation}}}{Sample size for elevation test}
-#'   \item{\code{\link{ssm_sample_size_amplitude_diff}}}{Sample size for amplitude comparison}
-#'   \item{\code{\link{ssm_sample_size_elevation_diff}}}{Sample size for elevation comparison}
-#'   \item{\code{\link{ssm_analyze}}}{Comprehensive SSM analysis with bootstrap CIs}
-#' }
 #'
-#' @section Utility Functions:
-#' \describe{
-#'   \item{\code{\link{ssm_parameters}}}{Calculate SSM parameters from octant scores}
-#'   \item{\code{\link{ssm_ci_amplitude}}}{Confidence interval for amplitude}
-#'   \item{\code{\link{ssm_ci_elevation}}}{Confidence interval for elevation}
-#'   \item{\code{\link{ssm_effect_label}}}{Interpret effect size magnitude}
-#'   \item{\code{\link{ssm_sample_size_guide}}}{Print quick reference guide}
-#'   \item{\code{\link{ssm_power_table}}}{Generate power table}
-#'   \item{\code{\link{run_app}}}{Launch interactive Shiny application}
-#' }
+#' **Power Calculation:**
+#' - [ssm_power_amplitude()]: Power for single-sample amplitude test
+#' - [ssm_power_elevation()]: Power for single-sample elevation test
+#' - [ssm_power_amplitude_diff()]: Power for two-group amplitude comparison
+#' - [ssm_power_elevation_diff()]: Power for two-group elevation comparison
 #'
-#' @section Effect Size Benchmarks:
-#' Based on Zimmermann & Wright (2017), from 433 published SSM analyses:
-#' \itemize{
-#'   \item Amplitude: Small = 0.10, Medium = 0.16, Large = 0.23
-#'   \item Elevation: Small = 0.02, Medium = 0.11, Large = 0.27
-#' }
+#' **Sample Size Planning:**
+#' - [ssm_sample_size_amplitude()]: Required n for amplitude test
+#' - [ssm_sample_size_elevation()]: Required n for elevation test
+#' - [ssm_sample_size_amplitude_diff()]: Required n per group for amplitude comparison
+#' - [ssm_sample_size_elevation_diff()]: Required n per group for elevation comparison
+#' - [ssm_sample_size_guide()]: Quick reference table
+#'
+#' **Analysis:**
+#' - [ssm_parameters()]: Calculate SSM parameters from octant scores
+#' - [ssm_analyze()]: Full analysis with bootstrap CIs and power
+#'
+#' **Utilities:**
+#' - [ssm_ci_amplitude()], [ssm_ci_elevation()]: Confidence intervals
+#' - [ssm_effect_label()]: Interpret effect sizes
+#' - [ssm_power_table()]: Generate power tables
 #'
 #' @section Scaling Constants:
-#' Empirically derived from bootstrap simulations:
-#' \itemize{
-#'   \item Amplitude: k = 0.41
-#'   \item Elevation: k = 0.60
-#' }
+#' The package uses empirically-derived scaling constants for standard errors:
+#' - Amplitude: k = 0.41
+#' - Elevation: k = 0.60
+#'
+#' These were derived from bootstrap simulations with N = 1,101 participants.
+#'
+#' @section Effect Size Benchmarks:
+#' From Zimmermann & Wright (2017), based on 433 published SSM analyses:
+#'
+#' **Amplitude:**
+#' - Small (25th percentile): 0.10
+#' - Medium (50th percentile): 0.16
+#' - Large (75th percentile): 0.23
+#'
+#' **Elevation:**
+#' - Small (25th percentile): 0.02
+#' - Medium (50th percentile): 0.11
+#' - Large (75th percentile): 0.27
 #'
 #' @references
-#' Cohen, J. (1988). \emph{Statistical power analysis for the behavioral
-#' sciences} (2nd ed.). Lawrence Erlbaum.
+#' Zimmermann, J., & Wright, A. G. C. (2017). Beyond description in
+#' interpersonal construct validation: Methodological advances in the
+#' circumplex Structural Summary Approach. *Assessment, 24*, 3-23.
+#' \doi{10.1177/1073191116656441}
 #'
 #' Gurtman, M. B. (1992). Construct validity of interpersonal personality
 #' measures: The interpersonal circumplex as a nomological net.
-#' \emph{Journal of Personality and Social Psychology, 63}, 105-118.
+#' *Journal of Personality and Social Psychology, 63*, 105-118.
+#' \doi{10.1037/0022-3514.63.1.105}
 #'
-#' Zimmermann, J., & Wright, A. G. C. (2017). Beyond description in
-#' interpersonal construct validation: Methodological advances in the
-#' circumplex Structural Summary Approach. \emph{Assessment, 24}, 3-23.
-#' \doi{10.1177/1073191116656437}
+#' Cohen, J. (1988). *Statistical power analysis for the behavioral sciences*
+#' (2nd ed.). Lawrence Erlbaum Associates.
 #'
 #' @docType package
 #' @name ssmpower-package
