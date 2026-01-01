@@ -1,7 +1,7 @@
 # ssmpower
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/yourusername/ssmpower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yourusername/ssmpower/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/kimberlyjg/ssmpower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kimberlyjg/ssmpower/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **Power Analysis for the Structural Summary Method**
@@ -13,7 +13,7 @@ for Structural Summary Method (SSM) analyses of circumplex data.
 
 ```r
 # Install from GitHub
-remotes::install_github("yourusername/ssmpower")
+remotes::install_github("kimberlyjg/ssmpower")
 ```
 
 ## Quick Start
@@ -100,9 +100,15 @@ full Monte Carlo verification.
 
 If you use this package, please cite:
 
-> Zimmermann, J., & Wright, A. G. C. (2017). Beyond description in interpersonal 
-> construct validation: Methodological advances in the circumplex Structural Summary 
-> Approach. *Assessment, 24*, 3-23. https://doi.org/10.1177/1073191116656441
+> Gilbert, K. J. (2025). ssmpower: Power Analysis for the SSM. R package version 1.0.0, https://kimberlyjg/ssmpower.
+
+@Manual{,
+  title = {ssmpower: Power Analysis for the SSM},
+  author = {Kimerly Gilbert},
+  year = {2025},
+  note = {R package version 1.0.0},
+  url = {https://kimberlyjg/ssmpower},
+}
 
 ## References
 
