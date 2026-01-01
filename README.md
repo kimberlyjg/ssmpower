@@ -15,6 +15,10 @@ for Structural Summary Method (SSM) analyses of circumplex data.
 Try the interactive web app: https://kjgilbert01.shinyapps.io/ssm-power-app/
 ```
 
+```r
+The project associated with this R package is https://osf.io/63wyf/
+```
+
 ## Installation
 
 ```r
