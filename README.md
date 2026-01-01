@@ -12,7 +12,7 @@ for Structural Summary Method (SSM) analyses of circumplex data.
 ```r
 ## Shiny App
 
-Try the interactive web app: https://kimberlyjg.shinyapps.io/ssm-power-app/
+Try the interactive web app: https://kjgilbert01.shinyapps.io/ssm-power-app/
 ```
 
 ## Installation
