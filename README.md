@@ -8,6 +8,10 @@
 
 The `ssmpower` package provides tools for power analysis and sample size planning 
 for Structural Summary Method (SSM) analyses of circumplex data.
+```
+## Shiny App
+
+Try the interactive web app: https://kimberlyjg.shinyapps.io/ssm-power-app/
 
 ## Installation
 
