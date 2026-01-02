@@ -1,6 +1,6 @@
 Package: ssmpower
 Title: Power Analysis for the Structural Summary Method
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     person("Kimberly", "Gilbert", email = "kjg6@fordham.edu", role = c("aut", "cre"))
 Description: Tools for power analysis and sample size planning for Structural 

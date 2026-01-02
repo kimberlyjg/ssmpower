@@ -32,7 +32,7 @@
 #' - Amplitude: k = 0.41
 #' - Elevation: k = 0.60
 #'
-#' These were derived from bootstrap simulations with N = 1,101 participants.
+#' These were derived from bootstrap simulations with N = 1,099 participants.
 #'
 #' @section Effect Size Benchmarks:
 #' From Zimmermann & Wright (2017), based on 433 published SSM analyses:

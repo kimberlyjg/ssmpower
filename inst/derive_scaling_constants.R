@@ -37,7 +37,7 @@ cat("Simulating dataset with realistic circumplex structure...\n\n")
 
 # Simulate data similar to LPFS-IPC study
 set.seed(42)
-N <- 1101  # Match your actual sample size
+N <- 1099  # Match your actual sample size
 
 # External variable (LPFS-like)
 lpfs_total <- rnorm(N, mean = 0, sd = 1)
