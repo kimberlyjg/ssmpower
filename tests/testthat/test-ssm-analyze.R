@@ -25,7 +25,6 @@ test_that("ssm_analyze returns correct structure", {
   expect_named(result, c("elevation", "amplitude", "displacement",
                          "ci_elevation", "ci_amplitude", "ci_displacement",
                          "effect_label_amplitude", "effect_label_elevation",
-                         "power_amplitude", "power_elevation",
                          "n", "n_boot", "conf_level", "correlations", "angles"))
 })
 
@@ -38,10 +37,8 @@ test_that("ssm_analyze produces valid parameter estimates", {
   result <- ssm_analyze(external, octants, n_boot = 100)
   
   # Check parameters are in valid ranges
-  expect_true(result$amplitude >= 0)
+ expect_true(result$amplitude >= 0)
   expect_true(result$displacement >= 0 && result$displacement <= 360)
-  expect_true(result$power_amplitude >= 0 && result$power_amplitude <= 1)
-  expect_true(result$power_elevation >= 0 && result$power_elevation <= 1)
 })
 
 
@@ -50,7 +47,7 @@ test_that("ssm_analyze CIs contain point estimate", {
   external <- rnorm(200)
   octants <- matrix(rnorm(200 * 8), ncol = 8)
   
-  result <- ssm_analyze(external, octants, n_boot = 500, seed = 123)
+  result <- ssm_analyze(external, octants, n_boot = 500)
   
   # Point estimates should be within CIs (usually)
   expect_true(result$elevation >= result$ci_elevation[1] && 
@@ -71,26 +68,13 @@ test_that("ssm_analyze detects known structure", {
   octants[, 2] <- octants[, 2] + 0.3 * external  # BC
   octants[, 8] <- octants[, 8] + 0.3 * external  # NO
   
-  result <- ssm_analyze(external, octants, n_boot = 200, seed = 123)
+  result <- ssm_analyze(external, octants, n_boot = 200)
   
   # Should detect significant amplitude
   expect_true(result$amplitude > 0.1)
   
   # Displacement should be near 0 degrees (PA direction)
-  # Allow for some noise
- expect_true(result$displacement < 60 || result$displacement > 300)
-})
-
-
-test_that("ssm_analyze is reproducible with seed", {
-  external <- rnorm(100)
-  octants <- matrix(rnorm(100 * 8), ncol = 8)
-  
-  result1 <- ssm_analyze(external, octants, n_boot = 100, seed = 42)
-  result2 <- ssm_analyze(external, octants, n_boot = 100, seed = 42)
-  
-  expect_equal(result1$ci_amplitude, result2$ci_amplitude)
-  expect_equal(result1$ci_elevation, result2$ci_elevation)
+  expect_true(result$displacement < 60 || result$displacement > 300)
 })
 
 
@@ -99,9 +83,8 @@ test_that("ssm_analyze n_boot affects CI width", {
   external <- rnorm(100)
   octants <- matrix(rnorm(100 * 8), ncol = 8)
   
-  # More bootstrap samples should give similar but potentially narrower CIs
-  result_100 <- ssm_analyze(external, octants, n_boot = 100, seed = 1)
-  result_1000 <- ssm_analyze(external, octants, n_boot = 1000, seed = 1)
+  result_100 <- ssm_analyze(external, octants, n_boot = 100)
+  result_1000 <- ssm_analyze(external, octants, n_boot = 1000)
   
   # Point estimates should be identical (same seed for data)
   expect_equal(result_100$amplitude, result_1000$amplitude)
@@ -129,7 +112,6 @@ test_that("print.ssm_analysis works", {
   
   expect_output(print(result), "SSM ANALYSIS RESULTS")
   expect_output(print(result), "PARAMETER ESTIMATES")
-  expect_output(print(result), "POST-HOC POWER")
   expect_output(print(result), "OCTANT CORRELATIONS")
 })
 

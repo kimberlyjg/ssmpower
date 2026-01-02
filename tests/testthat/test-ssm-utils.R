@@ -15,7 +15,7 @@ test_that("ssm_ci_amplitude truncates at 0", {
   # With small amplitude and small n, lower bound should be 0
   ci <- ssm_ci_amplitude(0.05, n = 20)
   
-  expect_equal(ci["lower"], 0)
+  expect_equal(unname(ci["lower"]), 0)
 })
 
 

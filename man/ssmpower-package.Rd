@@ -96,6 +96,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kimberly Gilbert \email{kjg6@fordham.edu}
+\strong{Maintainer}: Kimberly Gilbert \email{kjg6@fordham.edu} (\href{https://orcid.org/0009-0004-0373-6192}{ORCID})
 
 }

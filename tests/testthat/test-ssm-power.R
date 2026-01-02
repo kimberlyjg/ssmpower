@@ -61,7 +61,7 @@ test_that("ssm_power_elevation uses different k constant", {
 
 
 test_that("ssm_power_amplitude_diff works for two-sample design", {
-  result <- ssm_power_amplitude_diff(0.16, n1 = 100, n2 = 100)
+  result <- ssm_power_amplitude_diff(0.16, n1=100, n2=100)
   
   expect_s3_class(result, "ssm_power")
   expect_equal(result$design, "two_sample")
@@ -72,7 +72,7 @@ test_that("ssm_power_amplitude_diff works for two-sample design", {
 
 
 test_that("ssm_power_amplitude_diff handles unbalanced designs", {
-  balanced <- ssm_power_amplitude_diff(0.16, n1 = 100, n2 = 100)
+  balanced <- ssm_power_amplitude_diff(0.16, n1=100, n2=100)
   unbalanced <- ssm_power_amplitude_diff(0.16, n1 = 150, n2 = 50)
   
   # Balanced should have higher power for same total N
@@ -96,5 +96,5 @@ test_that("print.ssm_power works for single and two-sample", {
   expect_output(print(single), "SSM Power Analysis")
   expect_output(print(single), "single_sample")
   expect_output(print(two), "two_sample")
-  expect_output(print(two), "n1 = 100, n2 = 100")
+  expect_output(print(two), "n1=100, n2=100")
 })

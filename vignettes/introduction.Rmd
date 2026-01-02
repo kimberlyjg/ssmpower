@@ -175,7 +175,7 @@ for (i in 1:8) {
 }
 
 # Run analysis
-result <- ssm_analyze(lpfs, octants, n_boot = 1000, seed = 123)
+result <- ssm_analyze(lpfs, octants, n_boot = 1000)
 print(result)
 ```
 

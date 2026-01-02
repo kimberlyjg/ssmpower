@@ -2,9 +2,13 @@ Package: ssmpower
 Title: Power Analysis for the Structural Summary Method
 Version: 1.0.0
 Authors@R: 
-    person("Kimberly", "Gilbert", email = "kjg6@fordham.edu", role = c("aut", "cre"))
+    person("Kimberly", "Gilbert", , "kjg6@fordham.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0004-0373-6192"))
 Description: Tools for power analysis and sample size planning for Structural 
-    Summary Method (SSM) analyses of circumplex data.
+    Summary Method (SSM) analyses of circumplex data. Provides functions to 
+    calculate statistical power, determine required sample sizes, and generate 
+    power curves for amplitude and elevation parameters. Based on effect size 
+    benchmarks from Zimmermann and Wright (2017) <doi:10.1177/1073191115621795>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -13,9 +17,13 @@ Imports:
     stats
 Suggests: 
     ggplot2,
+    scales,
     testthat (>= 3.0.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    shiny,
+    bslib,
+    DT
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://github.com/kimberlyjg/ssmpower
