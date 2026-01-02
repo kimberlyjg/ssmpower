@@ -1,5 +1,4 @@
 # ssmpower: Power Analysis for the Structural Summary Method
-
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/kimberlyjg/ssmpower/workflows/R-CMD-check/badge.svg)](https://github.com/kimberlyjg/ssmpower/actions)
 <!-- badges: end -->
@@ -8,7 +7,7 @@
 
 **ssmpower** provides power analysis and sample size planning for Structural Summary Method (SSM) analyses of circumplex data. It implements the methods described in:
 
-> Gilbert, K. J. (2026). Power analysis for the Structural Summary Method. *Manuscript in preparation.*
+> Gilbert, K. J. (2025). Powering the circumplex: A practical guide to sample size for the structural summary method.
 
 ## Installation
 ```r
@@ -61,7 +60,35 @@ Based on Zimmermann & Wright (2017):
 | Single sample | Elevation | 7064 | 234 | 39 |
 | Two groups (per group) | Amplitude | 264 | 104 | 50 |
 
+## NEW: Displacement Power Analysis (Study 2)
+
+Version 1.1.0 adds power analysis for angular displacement (θ). The key insight:
+
+**Displacement precision depends on amplitude:**
+
+$$SE(\delta) = \frac{31°}{a \times \sqrt{n}}$$
+
+When amplitude is low (< 0.15), displacement becomes unreliable regardless of sample size.
+```r
+# Sample size for 30° displacement difference
+ssm_sample_size_displacement(delta_diff = 30, amplitude = 0.25)
+#> n = 54 per group
+
+# Precision reference table
+ssm_displacement_precision_table()
+```
+
+### Sample Sizes for Displacement (80% Power, Two-Group)
+
+| Amplitude | Δδ = 20° | Δδ = 30° | Δδ = 45° |
+|-----------|----------|----------|----------|
+| 0.20      | 188      | 84       | 38       |
+| 0.25      | 120      | 54       | 24       |
+| 0.30      | 84       | 38       | 17       |
+
 ## Main Functions
+
+### Amplitude & Elevation (Study 1)
 
 | Function | Purpose |
 |----------|---------|
@@ -71,6 +98,19 @@ Based on Zimmermann & Wright (2017):
 | `ssm_sample_size_elevation()` | Determine N for elevation tests |
 | `ssm_power_amplitude_diff()` | Power for two-group amplitude comparisons |
 | `ssm_sample_size_amplitude_diff()` | Sample size for two-group comparisons |
+
+### Displacement (Study 2)
+
+| Function | Purpose |
+|----------|---------|
+| `ssm_power_displacement()` | Power for displacement comparisons |
+| `ssm_sample_size_displacement()` | Sample size for displacement tests |
+| `ssm_displacement_precision_table()` | SE reference by amplitude × n |
+
+### Utilities
+
+| Function | Purpose |
+|----------|---------|
 | `ssm_analyze()` | Full SSM analysis with bootstrap CIs |
 | `ssm_sample_size_guide()` | Print quick reference table |
 | `run_app()` | Launch interactive Shiny calculator |
@@ -79,11 +119,11 @@ Based on Zimmermann & Wright (2017):
 
 If you use this package, please cite:
 ```
-Gilbert, K. J. (2026). Power analysis for the Structural Summary Method. 
-Manuscript in preparation.
+Gilbert, K. J. (2025). Powering the circumplex: A practical guide to sample 
+size for the structural summary method.
 
-Gilbert, K. J. (2026). ssmpower: Power Analysis for the Structural Summary 
-Method. R package version 1.0.0. https://github.com/kimberlyjg/ssmpower
+Gilbert, K. J. (2025). ssmpower: Power Analysis for the Structural Summary 
+Method. R package version 1.1.0. https://github.com/kimberlyjg/ssmpower
 ```
 
 ## References
