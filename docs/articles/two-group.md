@@ -1,0 +1,338 @@
+# Two-Group Comparisons
+
+``` r
+library(ssmpower)
+```
+
+## Overview
+
+This vignette covers power analysis and sample size planning for
+comparing SSM profiles between two independent groups. Common
+applications include:
+
+- Comparing clinical vs. non-clinical samples
+- Comparing treatment vs. control groups
+- Comparing diagnostic groups (e.g., depression vs. anxiety)
+- Examining gender or age group differences
+
+## The Two-Group Design
+
+In a two-group SSM comparison, you compute SSM parameters (amplitude,
+elevation, displacement) separately for each group and test whether they
+differ significantly. The key question is: **How large a sample do I
+need in each group to detect a meaningful difference?**
+
+## Power for Amplitude Differences
+
+### Basic Power Calculation
+
+Suppose you expect a medium difference in amplitude (0.16) between
+groups. With 100 participants per group:
+
+``` r
+ssm_power_amplitude_diff(effect = 0.16, n1 = 100, n2 = 100)
+#> 
+#> SSM Power Analysis
+#> ==================
+#> Type:        amplitude_difference (two_sample)
+#> Effect size: 0.160
+#> Sample size: n1=100, n2=100
+#> Alpha:       0.050
+#> Test:        two-sided
+#> ------------------
+#> Power:       0.788
+```
+
+### Required Sample Size
+
+To achieve 80% power for detecting a medium amplitude difference:
+
+``` r
+ssm_sample_size_amplitude_diff(effect = 0.16, power = 0.80)
+#> 
+#> SSM Sample Size Calculation
+#> ===========================
+#> Type:           amplitude_difference (two_sample)
+#> Effect size:    0.160
+#> Target power:   0.80
+#> Alpha:          0.050
+#> Test:           two-sided
+#> ---------------------------
+#> Required n1:    104
+#> Required n2:    104
+#> Total N:        208
+#> Achieved power: 0.8035
+```
+
+This tells you that you need **104 participants per group** (208 total)
+for 80% power.
+
+## Effect Size Benchmarks for Group Differences
+
+The same benchmarks from Zimmermann & Wright (2017) apply to group
+differences:
+
+| Parameter | Small | Medium | Large |
+|-----------|-------|--------|-------|
+| Amplitude | 0.10  | 0.16   | 0.23  |
+| Elevation | 0.02  | 0.11   | 0.27  |
+
+### Sample Sizes at Each Benchmark
+
+``` r
+# Amplitude differences
+cat("AMPLITUDE DIFFERENCES\n")
+#> AMPLITUDE DIFFERENCES
+cat("=====================\n")
+#> =====================
+for (effect in c(0.10, 0.16, 0.23)) {
+  result <- ssm_sample_size_amplitude_diff(effect, power = 0.80)
+  cat(sprintf("Effect = %.2f: n = %d per group (%d total)\n", 
+              effect, result$n1, result$n_total))
+}
+#> Effect = 0.10: n = 264 per group (528 total)
+#> Effect = 0.16: n = 104 per group (208 total)
+#> Effect = 0.23: n = 50 per group (100 total)
+
+cat("\nELEVATION DIFFERENCES\n")
+#> 
+#> ELEVATION DIFFERENCES
+cat("=====================\n")
+#> =====================
+for (effect in c(0.02, 0.11, 0.27)) {
+  result <- ssm_sample_size_elevation_diff(effect, power = 0.80)
+  cat(sprintf("Effect = %.2f: n = %d per group (%d total)\n", 
+              effect, result$n1, result$n_total))
+}
+#> Effect = 0.02: n = 14128 per group (28256 total)
+#> Effect = 0.11: n = 468 per group (936 total)
+#> Effect = 0.27: n = 78 per group (156 total)
+```
+
+## Unbalanced Designs
+
+Sometimes you can’t recruit equal numbers in each group. The `ratio`
+parameter allows for unbalanced designs.
+
+### Example: 2:1 Allocation
+
+If you have easier access to one population (e.g., non-clinical
+controls), you might use a 2:1 ratio:
+
+``` r
+# 2:1 ratio (n2 = 2 * n1)
+result <- ssm_sample_size_amplitude_diff(effect = 0.16, power = 0.80, ratio = 2)
+cat(sprintf("Group 1: n = %d\n", result$n1))
+#> Group 1: n = 78
+cat(sprintf("Group 2: n = %d\n", result$n2))
+#> Group 2: n = 155
+cat(sprintf("Total N: %d\n", result$n_total))
+#> Total N: 233
+cat(sprintf("Achieved power: %.3f\n", result$achieved_power))
+#> Achieved power: 0.803
+```
+
+### Comparing Allocation Strategies
+
+``` r
+# Compare different allocation ratios
+ratios <- c(1, 1.5, 2, 3)
+cat("Allocation Ratio Comparison (Effect = 0.16, Power = 0.80)\n")
+#> Allocation Ratio Comparison (Effect = 0.16, Power = 0.80)
+cat("=========================================================\n")
+#> =========================================================
+cat(sprintf("%-8s %-8s %-8s %-8s\n", "Ratio", "n1", "n2", "Total N"))
+#> Ratio    n1       n2       Total N
+cat("---------------------------------------------------------\n")
+#> ---------------------------------------------------------
+
+for (r in ratios) {
+  result <- ssm_sample_size_amplitude_diff(0.16, power = 0.80, ratio = r)
+  cat(sprintf("%-8.1f %-8d %-8d %-8d\n", r, result$n1, result$n2, result$n_total))
+}
+#> 1.0      104      104      208     
+#> 1.5      86       129      215     
+#> 2.0      78       155      233     
+#> 3.0      69       207      276
+```
+
+**Key insight**: Balanced designs (ratio = 1) are most efficient.
+Unbalanced designs require more total participants but may be necessary
+for practical reasons.
+
+## Power Tables for Planning
+
+### Amplitude Differences
+
+``` r
+# Create custom power table for two-group amplitude comparisons
+effects <- c(0.10, 0.15, 0.20, 0.25)
+ns_per_group <- c(50, 75, 100, 125, 150)
+
+cat("Power for Two-Group Amplitude Comparisons\n")
+#> Power for Two-Group Amplitude Comparisons
+cat("==========================================\n")
+#> ==========================================
+cat("(n per group shown; alpha = .05, two-sided)\n\n")
+#> (n per group shown; alpha = .05, two-sided)
+
+# Header
+cat(sprintf("%-10s", "Effect"))
+#> Effect
+for (n in ns_per_group) {
+  cat(sprintf("n=%-7d", n))
+}
+#> n=50     n=75     n=100    n=125    n=150
+cat("\n")
+cat(paste(rep("-", 50), collapse = ""), "\n")
+#> --------------------------------------------------
+
+# Power values
+for (e in effects) {
+  cat(sprintf("%-10.2f", e))
+  for (n in ns_per_group) {
+    power <- ssm_power_amplitude_diff(e, n1 = n, n2 = n)$power
+    cat(sprintf("%-9.3f", power))
+  }
+  cat("\n")
+}
+#> 0.10      0.230    0.321    0.407    0.487    0.561    
+#> 0.15      0.448    0.610    0.735    0.824    0.887    
+#> 0.20      0.684    0.848    0.932    0.971    0.988    
+#> 0.25      0.862    0.962    0.991    0.998    1.000
+```
+
+## Elevation Differences
+
+Elevation differences typically require larger samples because of the
+larger scaling constant (k = 0.60 vs 0.41).
+
+``` r
+# Compare amplitude vs elevation sample requirements
+cat("Sample Size Comparison: Amplitude vs Elevation Differences\n")
+#> Sample Size Comparison: Amplitude vs Elevation Differences
+cat("==========================================================\n")
+#> ==========================================================
+cat("(80% power, alpha = .05, balanced groups)\n\n")
+#> (80% power, alpha = .05, balanced groups)
+
+effects <- c("Small", "Medium", "Large")
+amp_effects <- c(0.10, 0.16, 0.23)
+elev_effects <- c(0.02, 0.11, 0.27)
+
+cat(sprintf("%-10s %-20s %-20s\n", "Size", "Amplitude (n/group)", "Elevation (n/group)"))
+#> Size       Amplitude (n/group)  Elevation (n/group)
+cat(paste(rep("-", 50), collapse = ""), "\n")
+#> --------------------------------------------------
+
+for (i in 1:3) {
+  amp_n <- ssm_sample_size_amplitude_diff(amp_effects[i], power = 0.80)$n1
+  elev_n <- ssm_sample_size_elevation_diff(elev_effects[i], power = 0.80)$n1
+  cat(sprintf("%-10s %-20d %-20d\n", effects[i], amp_n, elev_n))
+}
+#> Small      264                  14128               
+#> Medium     104                  468                 
+#> Large      50                   78
+```
+
+## Practical Recommendations
+
+### 1. Start with Amplitude
+
+Amplitude differences are usually the primary interest and require
+smaller samples than elevation differences. Plan your study around
+amplitude power first.
+
+### 2. Consider Expected Effect Size
+
+- **Large effects (0.23)**: 50 per group is sufficient
+- **Medium effects (0.16)**: Plan for ~100 per group
+- **Small effects (0.10)**: Need 250+ per group
+
+### 3. Use Balanced Designs When Possible
+
+Equal group sizes maximize power for a given total N.
+
+### 4. Account for Attrition
+
+Add 10-20% to your calculated sample size to account for dropout and
+missing data.
+
+``` r
+# Example: Accounting for 15% attrition
+planned_n <- ssm_sample_size_amplitude_diff(0.16, power = 0.80)$n1
+adjusted_n <- ceiling(planned_n / 0.85)
+cat(sprintf("Required n per group: %d\n", planned_n))
+#> Required n per group: 104
+cat(sprintf("Adjusted for 15%% attrition: %d\n", adjusted_n))
+#> Adjusted for 15% attrition: 123
+```
+
+## Quick Reference Table
+
+``` r
+cat("\n")
+cat("=============================================================\n")
+#> =============================================================
+cat("     TWO-GROUP SAMPLE SIZE QUICK REFERENCE (80% Power)\n")
+#>      TWO-GROUP SAMPLE SIZE QUICK REFERENCE (80% Power)
+cat("=============================================================\n")
+#> =============================================================
+cat("\n")
+cat("AMPLITUDE DIFFERENCES\n")
+#> AMPLITUDE DIFFERENCES
+cat("-------------------------------------------------------------\n")
+#> -------------------------------------------------------------
+cat("  Small (0.10):  264 per group  |  528 total\n")
+#>   Small (0.10):  264 per group  |  528 total
+cat("  Medium (0.16): 104 per group  |  208 total\n")
+#>   Medium (0.16): 104 per group  |  208 total
+cat("  Large (0.23):   50 per group  |  100 total\n")
+#>   Large (0.23):   50 per group  |  100 total
+cat("\n")
+cat("ELEVATION DIFFERENCES\n")
+#> ELEVATION DIFFERENCES
+cat("-------------------------------------------------------------\n")
+#> -------------------------------------------------------------
+cat("  Small (0.02):  17,896 per group  |  35,792 total\n")
+#>   Small (0.02):  17,896 per group  |  35,792 total
+cat("  Medium (0.11):    595 per group  |   1,190 total\n")
+#>   Medium (0.11):    595 per group  |   1,190 total
+cat("  Large (0.27):      99 per group  |     198 total\n")
+#>   Large (0.27):      99 per group  |     198 total
+cat("=============================================================\n")
+#> =============================================================
+```
+
+## Example: Clinical Study Planning
+
+**Scenario**: You want to compare interpersonal profiles between
+patients with borderline personality disorder (BPD) and healthy
+controls. Based on prior research, you expect a medium difference in
+amplitude.
+
+``` r
+# Primary analysis: amplitude difference
+amp_result <- ssm_sample_size_amplitude_diff(effect = 0.16, power = 0.80)
+
+cat("Study Planning: BPD vs. Healthy Controls\n")
+#> Study Planning: BPD vs. Healthy Controls
+cat("========================================\n\n")
+#> ========================================
+cat(sprintf("Primary outcome: Amplitude difference\n"))
+#> Primary outcome: Amplitude difference
+cat(sprintf("Expected effect: 0.16 (medium)\n"))
+#> Expected effect: 0.16 (medium)
+cat(sprintf("Required per group: %d\n", amp_result$n1))
+#> Required per group: 104
+cat(sprintf("Total required: %d\n", amp_result$n_total))
+#> Total required: 208
+cat(sprintf("With 15%% attrition buffer: %d per group\n", ceiling(amp_result$n1 / 0.85)))
+#> With 15% attrition buffer: 123 per group
+```
+
+## Citation
+
+To cite this package: Gilbert, K. (2025). *ssmpower: Power Analysis for
+the Structural Summary Method*. R package version 1.0.0.
+<https://github.com/kimberlyjg/ssmpower>

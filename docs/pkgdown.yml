@@ -1,0 +1,13 @@
+pandoc: '3.2'
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  introduction: introduction.html
+  power-curves: power-curves.html
+  simulation-validation: simulation-validation.html
+  two-group: two-group.html
+  worked-example: worked-example.html
+last_built: 2026-01-02T09:29Z
+urls:
+  reference: https://kimberlyjg.github.io/ssmpower/reference
+  article: https://kimberlyjg.github.io/ssmpower/articles
