@@ -1,0 +1,69 @@
+url: https://kimberlyjg.github.io/ssmpower/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+home:
+  title: "ssmpower: Power Analysis for the Structural Summary Method"
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, github]
+  components:
+    articles:
+      text: Vignettes
+      menu:
+      - text: Introduction
+        href: articles/introduction.html
+      - text: Power Curves
+        href: articles/power-curves.html
+      - text: Two-Group Designs
+        href: articles/two-group.html
+      - text: Simulation Validation
+        href: articles/simulation-validation.html
+      - text: Worked Example
+        href: articles/worked-example.html
+
+reference:
+- title: Package
+  contents:
+  - ssmpower-package
+
+- title: Power Analysis
+  desc: Calculate statistical power for SSM parameters
+  contents:
+  - ssm_power_amplitude
+  - ssm_power_elevation
+  - ssm_power_amplitude_diff
+  - ssm_power_elevation_diff
+  - ssm_power_table
+
+- title: Sample Size Planning
+  desc: Determine required sample sizes
+  contents:
+  - ssm_sample_size_amplitude
+  - ssm_sample_size_elevation
+  - ssm_sample_size_amplitude_diff
+  - ssm_sample_size_elevation_diff
+  - ssm_sample_size_guide
+
+- title: SSM Analysis
+  desc: Compute SSM parameters from data
+  contents:
+  - ssm_analyze
+  - ssm_parameters
+
+- title: Utilities
+  desc: Helper functions
+  contents:
+  - ssm_ci_amplitude
+  - ssm_ci_elevation
+  - ssm_effect_label
+  - run_app
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with

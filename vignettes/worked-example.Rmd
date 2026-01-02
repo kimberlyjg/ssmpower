@@ -27,7 +27,7 @@ This vignette walks through a complete SSM power analysis workflow using a reali
 
 1. A priori power analysis for study planning
 2. Analyzing collected data
-3. Post-hoc power assessment
+3. Interpreting results
 4. Reporting results
 
 ## Research Scenario
