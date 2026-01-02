@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://kimberlyjg.github.io/ssmpower/404.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/LICENSE-text.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/articles/displacement.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/articles/index.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/articles/introduction.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/articles/power-curves.html</loc></url>
@@ -10,20 +11,27 @@
 <url><loc>https://kimberlyjg.github.io/ssmpower/authors.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/index.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/news/index.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/K_DISPLACEMENT.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/displacement.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/index.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/run_app.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_analyze.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_ci_amplitude.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_ci_elevation.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_displacement_precision_table.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_effect_label.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_parameters.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_amplitude.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_amplitude_diff.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_displacement.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_displacement_diff.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_elevation.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_elevation_diff.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_power_table.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_amplitude.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_amplitude_diff.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_displacement.html</loc></url>
+<url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_displacement_diff.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_elevation.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_elevation_diff.html</loc></url>
 <url><loc>https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_guide.html</loc></url>

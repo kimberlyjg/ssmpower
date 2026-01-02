@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Kimberly Gilbert**. Author, maintainer.
+- **Kimberly J. Gilbert**. Author, maintainer.
   [](https://orcid.org/0009-0004-0373-6192)
 
 ## Citation

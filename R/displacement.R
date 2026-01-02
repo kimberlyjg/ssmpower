@@ -19,6 +19,8 @@
 #'
 #' Zimmermann, J., & Wright, A. G. C. (2017). Beyond description in
 #'   interpersonal construct validation. Assessment, 24(1), 3-23.
+#'
+#' @importFrom stats pnorm qnorm reshape
 NULL
 
 #' Scaling constant for displacement (in degrees)
@@ -70,10 +72,8 @@ K_DISPLACEMENT <- 31
 ssm_power_displacement <- function(delta_diff, amplitude, n, alpha = 0.05,
                                     k_delta = K_DISPLACEMENT, two_group = TRUE) {
 
-
   # Input validation
-
-if (amplitude < 0.05) {
+  if (amplitude < 0.05) {
     warning("Amplitude < 0.05: displacement is essentially undefined")
     return(list(
       power = NA,
@@ -302,11 +302,11 @@ ssm_sample_size_displacement_diff <- function(delta_diff, amplitude, power = 0.8
   z_alpha <- qnorm(1 - alpha / 2)
 
   # General formula with unequal allocation
-  n1 <- (k_delta / amplitude)^2 * (z_alpha + z_beta)^2 * (1 + 1/ratio) / delta_diff^2
-  n2 <- n1 * ratio
+  n1_exact <- (k_delta / amplitude)^2 * (z_alpha + z_beta)^2 * (1 + 1/ratio) / delta_diff^2
+  n2_exact <- n1_exact * ratio
 
-  n1 <- ceiling(n1)
-  n2 <- ceiling(n2)
+  n1 <- ceiling(n1_exact)
+  n2 <- ceiling(n2_exact)
 
   achieved <- ssm_power_displacement_diff(delta_diff, amplitude, n1, n2,
                                            alpha, k_delta)

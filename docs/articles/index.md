@@ -2,6 +2,8 @@
 
 ### All vignettes
 
+- [Displacement Power
+  Analysis](https://kimberlyjg.github.io/ssmpower/articles/displacement.md):
 - [Introduction to
   ssmpower](https://kimberlyjg.github.io/ssmpower/articles/introduction.md):
 - [Creating Power Curves and

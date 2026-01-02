@@ -136,6 +136,25 @@ Determine required sample sizes
 - [`ssm_sample_size_guide()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_guide.md)
   : Print Sample Size Quick Reference Guide
 
+## Displacement Analysis (Study 2)
+
+Power and sample size for angular displacement
+
+- [`displacement`](https://kimberlyjg.github.io/ssmpower/reference/displacement.md)
+  : Power Analysis for SSM Displacement
+- [`ssm_power_displacement()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_power_displacement.md)
+  : Power for Displacement Comparison
+- [`ssm_power_displacement_diff()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_power_displacement_diff.md)
+  : Power for Two-Group Displacement Difference
+- [`ssm_sample_size_displacement()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_displacement.md)
+  : Sample Size for Displacement Comparison
+- [`ssm_sample_size_displacement_diff()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_sample_size_displacement_diff.md)
+  : Sample Size for Two-Group Displacement Difference
+- [`ssm_displacement_precision_table()`](https://kimberlyjg.github.io/ssmpower/reference/ssm_displacement_precision_table.md)
+  : Displacement Precision Table
+- [`K_DISPLACEMENT`](https://kimberlyjg.github.io/ssmpower/reference/K_DISPLACEMENT.md)
+  : Scaling constant for displacement (in degrees)
+
 ## SSM Analysis
 
 Compute SSM parameters from data
@@ -162,6 +181,8 @@ Helper functions
 
 ### All vignettes
 
+- [Displacement Power
+  Analysis](https://kimberlyjg.github.io/ssmpower/articles/displacement.md):
 - [Introduction to
   ssmpower](https://kimberlyjg.github.io/ssmpower/articles/introduction.md):
 - [Creating Power Curves and

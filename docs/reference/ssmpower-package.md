@@ -114,5 +114,5 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Kimberly Gilbert <kjg6@fordham.edu>
+**Maintainer**: Kimberly J. Gilbert <kjg6@fordham.edu>
 ([ORCID](https://orcid.org/0009-0004-0373-6192))

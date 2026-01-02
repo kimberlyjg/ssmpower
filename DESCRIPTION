@@ -22,7 +22,11 @@ Suggests:
     ggplot2,
     testthat (>= 3.0.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    shiny,
+    bslib,
+    DT,
+    scales
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://github.com/kimberlyjg/ssmpower
